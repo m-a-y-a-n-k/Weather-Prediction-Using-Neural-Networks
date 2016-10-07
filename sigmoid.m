@@ -3,5 +3,4 @@
 
 function [s] = sigmoid (m)
 s = (e.^m + 1).^(-1);
-s = (s >= 0.5);
 endfunction
