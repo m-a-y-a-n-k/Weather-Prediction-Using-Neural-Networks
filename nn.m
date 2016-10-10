@@ -1,0 +1,49 @@
+## Author: user <user@DELL>
+## Created: 2016-10-09
+
+function [THETA1_new, THETA2_new, THETA3_new] = nn (X, Y, THETA1, THETA2, THETA3, IEPSILON, init_w, learn, alpha)
+   m = size(X,2);
+   nof = size(X,1);
+   K = size(Y,1);
+   
+  if (init_w == 1)
+    THETA1 = 2*IEPSILON*rand( K, nof ) - IEPSILON;
+    THETA2 = 2*IEPSILON*rand( K, K+1 ) - IEPSILON;
+    THETA3 = 2*IEPSILON*rand( K, K+1 ) - IEPSILON;
+  endif
+  J = 0.0;
+  T1_DELTA = zeros(size(THETA1));
+  T2_DELTA = zeros(size(THETA2));
+  T3_DELTA = zeros(size(THETA3));
+  
+  for i = 1:m
+    A1 = X(:,i);
+    Z2 = THETA1 * A1;
+    A2 = [1; sigmoid(Z2)];
+    Z3 = THETA2 * A2;
+    A3 = [1; sigmoid(Z3)];
+    Z4 = THETA3 * A3;
+    h = sigmoid(Z4);
+    J = J + sum( Y(:,i).*log(h) ) + sum( (1 - Y(:,i) ).*log(1 - h) );
+    if (learn == 1)
+      delta4 = h - Y(:,i);
+      delta3 = ((THETA3' * delta4) .* (1 - A3.^2))(2:end);
+      delta2 = ((THETA2' * delta3) .* (1 - A2.^2))(2:end);
+      T3_DELTA = T3_DELTA + (delta4 * A3');
+      T2_DELTA = T2_DELTA + (delta3 * A2');
+      T1_DELTA = T1_DELTA + (delta2 * A1');
+      THETA1 = THETA1 - (alpha * (T1_DELTA / m));
+      THETA2 = THETA2 - (alpha * (T2_DELTA / m));
+      THETA3 = THETA3 - (alpha * (T3_DELTA / m));
+    else
+      disp('Hypothesis for Day '), disp(i), disp(' is '), disp(h');
+    endif
+  endfor
+  J = J / m;
+  if (learn==0)
+    disp('J: '), disp(J);
+  endif
+  THETA1_new = THETA1;
+  THETA2_new = THETA2;
+  THETA3_new = THETA3;
+endfunction
