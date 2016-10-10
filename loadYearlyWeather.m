@@ -40,7 +40,7 @@ X4 = X4';
 X5 = X5';
 
 Y1 = 2.^(log10(Y1));
-Nbits = 4;                          % # of bits you want your representation 
+Nbits = 4;                           % # of bits you want your representation 
 bitmap = uint32( 2.^[0:Nbits-1]);    # create a bitwise-and mask for every bit 
 a = zeros( length(Y1), Nbits ); 
 for ii=1:length(Y1) 
@@ -49,7 +49,7 @@ end
 Y1 = a';
 
 Y2 = 2.^(log10(Y2));
-Nbits = 4;                          % # of bits you want your representation 
+Nbits = 4;                           % # of bits you want your representation 
 bitmap = uint32( 2.^[0:Nbits-1]);    # create a bitwise-and mask for every bit 
 a = zeros( length(Y2), Nbits ); 
 for ii=1:length(Y2) 
@@ -58,7 +58,7 @@ end
 Y2 = a';
 
 Y3 = 2.^(log10(Y3));
-Nbits = 4;                          % # of bits you want your representation 
+Nbits = 4;                           % # of bits you want your representation 
 bitmap = uint32( 2.^[0:Nbits-1]);    # create a bitwise-and mask for every bit 
 a = zeros( length(Y3), Nbits ); 
 for ii=1:length(Y3) 
@@ -67,7 +67,7 @@ end
 Y3 = a';
 
 Y4 = 2.^(log10(Y4));
-Nbits = 4;                          % # of bits you want your representation 
+Nbits = 4;                           % # of bits you want your representation 
 bitmap = uint32( 2.^[0:Nbits-1]);    # create a bitwise-and mask for every bit 
 a = zeros( length(Y4), Nbits ); 
 for ii=1:length(Y4) 
@@ -76,7 +76,7 @@ end
 Y4 = a';
 
 Y5 = 2.^(log10(Y5));
-Nbits = 4;                          % # of bits you want your representation 
+Nbits = 4;                           % # of bits you want your representation 
 bitmap = uint32( 2.^[0:Nbits-1]);    # create a bitwise-and mask for every bit 
 a = zeros( length(Y5), Nbits ); 
 for ii=1:length(Y5) 

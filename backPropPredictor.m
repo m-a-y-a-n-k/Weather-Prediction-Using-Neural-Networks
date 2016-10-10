@@ -4,11 +4,12 @@
 function [gradVec] = backPropPredictor (a1,a2,a3,theta1,theta2,Y,m,lambda)
 err3 = a3 - Y;
 err3 = err3';
-err3(:,[1]) = [];           # removing 1st column of bias
+err3(:,[1]) = [];                 # removing 1st column of bias
 err3 = err3';
+
 err2 = theta2'*err3;
 err2 = err2';
-err2(:,[1]) = [];           # removing 1st column of bias 
+err2(:,[1]) = [];                 # removing 1st column of bias
 err2 = err2';
 
 Del2 = err3*a2';

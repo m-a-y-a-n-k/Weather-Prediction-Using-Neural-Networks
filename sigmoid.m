@@ -3,5 +3,5 @@
 
 function [s] = sigmoid (m)
 s = 2./(1+e.^((-2)*m)) - 1;
-s = ( s >= 0.5 ); 
+s = ( s > 0.5 ); 
 endfunction
