@@ -13,7 +13,7 @@ function [THETA1_new, THETA2_new, THETA3_new, fC] = nn (X, Y, fC, m, THETA1, THE
     THETA3 = 2*IEPSILON*rand( K, K+1 ) - IEPSILON;
   endif
   J = 0.0; 
-  for i = 1:100
+  for i = 1:10
     A1 = X;
     Z2 = THETA1 * A1;
     A2 = [1; sigmoid(Z2)];
@@ -32,7 +32,7 @@ function [THETA1_new, THETA2_new, THETA3_new, fC] = nn (X, Y, fC, m, THETA1, THE
       THETA2 = THETA2 - (alpha * (T2_DELTA));
       THETA3 = THETA3 - (alpha * (T3_DELTA));
   endfor
-  J = J/100;
+  J = J/10;
   fC = [fC;h'];
   THETA1_new = THETA1;
   THETA2_new = THETA2;

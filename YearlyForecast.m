@@ -6,7 +6,7 @@ function YearlyForecast()
     #load all the files having weather data each day
     [X1,X2,X3,X4,X5,Y1,Y2,Y3,Y4,Y5] = loadYearlyWeather();
     
-    lambda = 10;                      # regularization parameter
+    lambda = 0.1;                      # regularization parameter
     IEPSILON = 0.5;                   # range for initial theta of each layer
     
     nof = size(X1,1);                 # number of features
@@ -24,7 +24,7 @@ function YearlyForecast()
     [oTone5,oTtwo5,fP5] = Predictor(X4,X5,oTone4,oTtwo4,lambda);
     
     IEPSILON = 1;                   # range for initial theta of each layer
-    alpha = 0.2;                    # learning rate
+    alpha = 0.3;                    # learning rate
     
     # Training Nueral Network to make Classifications for 5 years
     [opTone1,opTtwo1,opTthree1,fC1] = Classifier(X1,Y1,alpha,IEPSILON);
