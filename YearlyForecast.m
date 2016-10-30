@@ -4,25 +4,28 @@
 function YearlyForecast()
 
     #load all the files having weather data each day
-    [X1,X2,X3,X4,X5,Y1,Y2,Y3,Y4,Y5] = loadYearlyWeather();
+    [X,Y] = loadYearlyWeather();
     
-    lambda = 0.1;                      # regularization parameter
-    IEPSILON = 0.5;                   # range for initial theta of each layer
+    lambda = 0.01;                   # regularization parameter
+    IEPSILON = 10;                   # range for initial theta of each layer
     
-    nof = size(X1,1);                 # number of features
-    m = size(X1,2);                   # number of training examples
-    K = size(Y1,1);                   # number of classification outputs
+    nof = size(X,1);                 # number of features
+    m = size(X,2);                   # number of training examples
+    K = size(Y,1);                   # number of classification outputs
     
     # Choose initial Theta for Layer 1 and Layer 2 of Nueral Network
     iTheta1 = 2*IEPSILON*rand( nof - 1, nof ) - IEPSILON*ones(nof-1, nof);
 	  iTheta2 = 2*IEPSILON*rand( nof - 1, nof ) - IEPSILON*ones(nof-1, nof);
   
-    # Training Nueral Network to make Predictions for 5 years
-    [oTone2,oTtwo2,fP2] = Predictor(X1,X2,iTheta1,iTheta2,lambda);
-    [oTone3,oTtwo3,fP3] = Predictor(X2,X3,oTone2,oTtwo2,lambda);
-    [oTone4,oTtwo4,fP4] = Predictor(X3,X4,oTone3,oTtwo3,lambda);
-    [oTone5,oTtwo5,fP5] = Predictor(X4,X5,oTone4,oTtwo4,lambda);
-    
+    # Training Nueral Network to make Predictions for 20 years
+    [OT1,OT2,FP] = Predictor(X(:,[1:365]),X(:,366),iTheta1,iTheta2,lambda);          #Initialization of neural network by 1st year data
+    FP = FP';
+    for i = 367:6935
+        [OT1,OT2,fp] = Predictor(X(:,[i-365:i-1]),X(:,i),OT1,OT2,lambda);
+        FP = [FP;fp'];
+    endfor
+    FP = FP';
+    #{
     IEPSILON = 1;                   # range for initial theta of each layer
     alpha = 0.3;                    # learning rate
     
@@ -45,7 +48,6 @@ function YearlyForecast()
     fC6 = sigmoid(Z4);
     
     # Save all data into text files
-    
     fP2 = [fP2;fC2];
     fP3 = [fP3;fC3];
     fP4 = [fP4;fC4];
@@ -53,4 +55,5 @@ function YearlyForecast()
     fP6 = [fP6;fC6];
     
     saveYearlyPrediction(fP2',fP3',fP4',fP5',fP6');
+    #}
 endfunction

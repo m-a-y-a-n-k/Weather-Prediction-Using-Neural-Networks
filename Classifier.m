@@ -7,10 +7,10 @@ function [THETA1,THETA2,THETA3,fC] = Classifier (X, Y, alpha, IEPSILON)
     THETA2 = 0;
     THETA3 = 0;
     fC = 0;
-    
-    [THETA1, THETA2, THETA3, fC] = nn(X(:,1), Y(:,1), fC, 1, THETA1, THETA2, THETA3, IEPSILON, 1, alpha);
+    J = 0.0;
+    [THETA1, THETA2, THETA3, fC, J] = nn(X(:,1), Y(:,1), fC, 1, THETA1, THETA2, THETA3, IEPSILON, 1, alpha,J);
     for i = 2:365
-      [THETA1, THETA2, THETA3, fC] = nn(X(:,i), Y(:,i), fC, i, THETA1, THETA2, THETA3, IEPSILON, 0, alpha);
+      [THETA1, THETA2, THETA3, fC, J] = nn(X(:,i), Y(:,i), fC, i, THETA1, THETA2, THETA3, IEPSILON, 0, alpha,J);
     endfor
     
     fC = fC';
