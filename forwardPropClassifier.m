@@ -1,16 +1,12 @@
 ## Author: user <user@DELL>
-## Created: 2016-10-01
+## Created: 2016-9-31
 
-function [a1,a2,a3,a4] = forwardPropClassifier (X,iT1,iT2,iT3,m)
-                                  # Layer 1 input features scaling
-  if( X >= 10 )
-      X = X./(10^log10(X));
-  endif
-  a1 = X;
-  z1 = sigmoid(iT1*a1);
-  a2 = [ ones(1,m); z1 ];         # Layer 2 with bias
-  z2 = sigmoid(iT2*a2);
-  a3 = [ ones(1,m); z2];          # Layer 3 with bias
-  z3 = sigmoid(iT3*a3); 
-  a4 = z3;                        # Layer 4 Output Classification Hypothesis
+function [A2,A3,A4] = forwardPropClassifier (X,THETA1,THETA2,THETA3)
+    A1 = X;
+    Z2 = THETA1 * A1;
+    A2 = [1; sigmoid(Z2)];
+    Z3 = THETA2 * A2;
+    A3 = [1; sigmoid(Z3)];
+    Z4 = THETA3 * A3;
+    A4 = sigmoid(Z4);
 endfunction
