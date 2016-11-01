@@ -17,3 +17,5 @@ Steps To run the project:
 
 
 4.Open the files "PredictionWeather1997.txt" to "PredictionWeather2016.txt" and compare with actual results from "Weather1997.txt" to "Weather2015.txt".
+
+5. Curves are plotted to compare predictions with actual weather conditions and they will be saved in the same directory... 
