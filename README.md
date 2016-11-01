@@ -1,5 +1,5 @@
 # Weather-Prediction-Using-Neural-Networks
-Machine Learning Project for classifying Weather into Stormy (1000) , Rainy(0100) , Foggy (0010) , Sunny(0001) and also predict weather features for next one year after training on 20 years data on a neural network 
+Machine Learning Project for classifying Weather into ThunderStorm (0001) , Rainy(0010) , Foggy (0100) , Sunny(1000) and also predict weather features for next one year after training on 20 years data on a neural network 
 This is my first Machine Learning Project.
 
 
