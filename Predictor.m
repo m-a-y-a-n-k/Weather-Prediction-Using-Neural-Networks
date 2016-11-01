@@ -6,7 +6,7 @@ function [optTheta1,optTheta2,fP] = Predictor(X,Y,iniTheta1,iniTheta2,lambda)
   thetaVec = [ iniTheta1(:); iniTheta2(:) ];
   
   # Minimize Cost Function to get OptTheta Vector
-  options = optimset( 'GradObj' , 'on' , 'MaxIter' , 100 );
+  options = optimset( 'GradObj' , 'on' , 'MaxIter' , 50 );
   [optThetaVec, jMin, exitFlag ] = fminunc( @(thetaVec)(predictionCostFunction(thetaVec,nof,X,Y,m,lambda)), thetaVec, options );
 
   # Reshaping Optimal Theta Vector into Matrices for Layer 1 and Layer 2  
@@ -18,3 +18,4 @@ function [optTheta1,optTheta2,fP] = Predictor(X,Y,iniTheta1,iniTheta2,lambda)
   fP = fP';
   fP = sum(fP)/m;
   fP = fP';
+endfunction
