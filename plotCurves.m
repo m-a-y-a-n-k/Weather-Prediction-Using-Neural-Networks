@@ -1,8 +1,8 @@
 function plotCurves(Prediction, Actual, Y)
     
-    m = size(Actual,1);
+    M = size(Actual,1);
     nof = size(Actual,2);
-    X=1:1:m;
+    X=1:1:M;
     
     for i=2:nof
         figure;
@@ -44,34 +44,41 @@ function plotCurves(Prediction, Actual, Y)
     
     Y3 = 0;
     Y4 = 0;
-    for i = 1:m
-       if Y(i,:) == [0,0,0,1]                                   # ThunderStorm
+    for i = 1:M
+      if Y(:,i) == [0;0;0;1]                                    # Actually ThunderStorm
             Y3 = [Y3,1];
-       elseif Y(i,:) == [0,0,1,0]                               # Rainy  
+      elseif Y(:,i) == [0;0;1;0]                                # Actually Rainy  
             Y3 = [Y3,2];
-       elseif Y(i,:) == [0,1,0,0]                               # Foggy
+      elseif Y(:,i) == [0;1;0;0]                                # Actually Foggy
             Y3 = [Y3,3];                                                      
-       else
-            Y3 = [Y3,4];                                        # Sunny
-       endif
-      if Prediction(i,[13:16]) == [0,0,0,1]
+      else
+            Y3 = [Y3,4];                                        # Actually Sunny
+      endif
+       
+      if Prediction(i,[13:16]) == [0,0,0,1]                     # Predicted ThunderStorm
           Y4 = [Y4,1];
-      elseif Prediction(i,[13:16]) == [0,0,1,0]
+      elseif Prediction(i,[13:16]) == [0,0,1,0]                 # Predicted Rainy  
           Y4 = [Y4,2];
-      elseif Prediction(i,[13:16]) == [0,1,0,0]
+      elseif Prediction(i,[13:16]) == [0,1,0,0]                 # Predicted Foggy
           Y4 = [Y4,3];
       else
-          Y4 = [Y4,4];
+          Y4 = [Y4,4];                                          # Predicted Sunny
       endif
     endfor
     
     Y3(:,1) = [];
-    Y4(:,1) = [];
     figure;     
-    plot(X, Y3,"*", X, Y4,"@");
-    legend('Actual', 'Prediction');
+    plot(X, Y3,"*r");
     xlabel('Day');
     ylabel('Event');  
-    filename = sprintf(strcat("Classes",'.png'));
+    filename = sprintf(strcat("Actual Classes",'.png'));
+    saveas(gcf, filename, 'png');
+    
+    Y4(:,1) = [];
+    figure;     
+    plot(X, Y4,"@b");
+    xlabel('Day');
+    ylabel('Event');  
+    filename = sprintf(strcat("Predicted Classes",'.png'));
     saveas(gcf, filename, 'png');
 endfunction

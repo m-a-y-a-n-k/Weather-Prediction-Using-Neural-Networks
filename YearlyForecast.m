@@ -11,7 +11,7 @@ function YearlyForecast()
     
     nof = size(X,1);                 # number of features
     M = size(X,2);                   # number of training examples
-    M = 365*5;
+    M = 365*2;
     K = size(Y,1);                   # number of classification outputs
     
     # Choose initial Theta for Layer 1 and Layer 2 of Nueral Network
@@ -25,7 +25,6 @@ function YearlyForecast()
         [OT1,OT2,fp] = Predictor(X(:,[i-365:i-1]),X(:,i),OT1,OT2,lambda);
         FP = [FP;fp'];
     endfor
-    FP = FP';
     
     alpha = 0.75;                    # learning rate
     
@@ -36,7 +35,7 @@ function YearlyForecast()
     saveNN(OT1,OT2,OTC1,OTC2,OTC3);
     
     # Save all data into text files
-    FP = [(X(:,[1:365]))';FP']';
+    FP = [(X(:,[1:365]))';FP]';
     FP = [FP;FC']';
     saveYearlyPrediction(FP);
     

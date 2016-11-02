@@ -30,9 +30,9 @@ function [X,Y] = loadYearlyWeather()
   Nbits = 4;                                                     # number of bits you want your representation 
   bitmap = uint32( 2.^[0:Nbits-1]);                              # create a bitwise-and mask for every bit 
   a = zeros( length(Y), Nbits ); 
-  for ii=1:length(Y) 
+  for ii = 1:length(Y) 
       a(ii,:) = bitand(Y(ii), bitmap )~=0; 
-  endfor 
+  endfor
   Y = a';
 
 endfunction

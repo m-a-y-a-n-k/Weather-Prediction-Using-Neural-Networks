@@ -7,7 +7,7 @@ function [jVal,gradientVec] = predictionCostFunction (thetaVec,nof,X,Y,m,lambda)
   theta2 = reshape( thetaVec( ( (nof-1)*nof )+1:(nof-1)*nof*2), nof-1, nof );
 
 # Aplying forward propagation 
-  [a1,a2,a3] = forwardPropPredictor(X,theta1,theta2,m);
+  [a1,a2,a3] = forwardPropPredictor(X,theta1,theta2);
   
 # Computing Error and Cost Function
   sqrError = 0;
