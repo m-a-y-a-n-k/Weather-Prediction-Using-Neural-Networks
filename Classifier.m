@@ -7,7 +7,6 @@ function [THETA1,THETA2,THETA3,FC] = Classifier (X, Y, alpha, IEPSILON)
     THETA2 = 0;
     THETA3 = 0;
     M = size(X,2);
-    M = 365*2;
     FC = 0;
     J = 0;
     [THETA1, THETA2, THETA3, J, FC] = nn(X(:,1), Y(:,1), THETA1, THETA2, THETA3, IEPSILON, 1, alpha, J, FC);

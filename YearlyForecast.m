@@ -11,7 +11,6 @@ function YearlyForecast()
     
     nof = size(X,1);                 # number of features
     M = size(X,2);                   # number of training examples
-    M = 365*2;
     K = size(Y,1);                   # number of classification outputs
     
     # Choose initial Theta for Layer 1 and Layer 2 of Nueral Network

@@ -5,12 +5,6 @@ function plotCurves(Prediction, Actual, Y)
     X=1:1:M;
     
     for i=2:nof
-        figure;
-        Y1=Prediction(:,[i]);
-        Y2=Actual(:,[i]);
-        plot(X, Y1, 'r', X, Y2, 'b');
-        legend('Prediction', 'Actual');
-        xlabel('Day');
         switch (i)
             case 2
                 label = "Max Temperature";
@@ -37,6 +31,12 @@ function plotCurves(Prediction, Actual, Y)
             otherwise
                 label = "unknown";
         endswitch
+        figure;
+        Y1=Prediction(:,[i]);
+        Y2=Actual(:,[i]);
+        plot(X, Y2, 'g', X, Y1, '^r');
+        legend('Actual', 'Prediction');
+        xlabel('Day');
         ylabel(label);
         filename = sprintf(strcat(label,'.png'));
         saveas(gcf, filename, 'png');
@@ -45,21 +45,21 @@ function plotCurves(Prediction, Actual, Y)
     Y3 = 0;
     Y4 = 0;
     for i = 1:M
-      if Y(:,i) == [0;0;0;1]                                    # Actually ThunderStorm
+      if Y(:,i) == [1;0;0;0]                                    # Actually ThunderStorm
             Y3 = [Y3,1];
-      elseif Y(:,i) == [0;0;1;0]                                # Actually Rainy  
+      elseif Y(:,i) == [0;1;0;0]                                # Actually Rainy  
             Y3 = [Y3,2];
-      elseif Y(:,i) == [0;1;0;0]                                # Actually Foggy
+      elseif Y(:,i) == [0;0;1;0]                                # Actually Foggy
             Y3 = [Y3,3];                                                      
       else
             Y3 = [Y3,4];                                        # Actually Sunny
       endif
        
-      if Prediction(i,[13:16]) == [0,0,0,1]                     # Predicted ThunderStorm
+      if Prediction(i,[13:16]) == [1,0,0,0]                     # Predicted ThunderStorm
           Y4 = [Y4,1];
-      elseif Prediction(i,[13:16]) == [0,0,1,0]                 # Predicted Rainy  
+      elseif Prediction(i,[13:16]) == [0,1,0,0]                 # Predicted Rainy  
           Y4 = [Y4,2];
-      elseif Prediction(i,[13:16]) == [0,1,0,0]                 # Predicted Foggy
+      elseif Prediction(i,[13:16]) == [0,0,1,0]                 # Predicted Foggy
           Y4 = [Y4,3];
       else
           Y4 = [Y4,4];                                          # Predicted Sunny
@@ -67,18 +67,13 @@ function plotCurves(Prediction, Actual, Y)
     endfor
     
     Y3(:,1) = [];
-    figure;     
-    plot(X, Y3,"*r");
-    xlabel('Day');
-    ylabel('Event');  
-    filename = sprintf(strcat("Actual Classes",'.png'));
-    saveas(gcf, filename, 'png');
-    
     Y4(:,1) = [];
     figure;     
-    plot(X, Y4,"@b");
+    plot(X, Y3,"@b",X,Y4,'*r');
+    legend('Actual','Prediction');
     xlabel('Day');
     ylabel('Event');  
-    filename = sprintf(strcat("Predicted Classes",'.png'));
+    filename = sprintf(strcat("Classes",'.png'));
     saveas(gcf, filename, 'png');
+    
 endfunction

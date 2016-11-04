@@ -13,9 +13,9 @@ function [THETA1_new, THETA2_new, THETA3_new, J, FC] = nn (X, Y, THETA1, THETA2,
     THETA3 = 2*IEPSILON*rand( K, K+1 ) - IEPSILON;
   endif
   
-  for i = 1:1000
+  for i = 1:500
       [A2,A3,h] = forwardPropClassifier(X,THETA1,THETA2,THETA3);
-      if i == 1000
+      if i == 500
           h = (h > 0.5);
           FC = [FC;h'];
           J = J + ( sum( Y.*(h) ) + sum( ( 1 - Y ).*(1 - h) ) );
