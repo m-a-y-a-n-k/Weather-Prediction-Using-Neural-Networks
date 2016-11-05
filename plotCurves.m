@@ -34,7 +34,7 @@ function plotCurves(Prediction, Actual, Y)
         figure;
         Y1=Prediction(:,[i]);
         Y2=Actual(:,[i]);
-        plot(X, Y2, 'g', X, Y1, '^r');
+        plot(X, Y2, '*g', X, Y1, '@r');
         legend('Actual', 'Prediction');
         xlabel('Day');
         ylabel(label);
@@ -69,7 +69,7 @@ function plotCurves(Prediction, Actual, Y)
     Y3(:,1) = [];
     Y4(:,1) = [];
     figure;     
-    plot(X, Y3,"@b",X,Y4,'*r');
+    plot(X, Y3,"^b",X,Y4,'@r');
     legend('Actual','Prediction');
     xlabel('Day');
     ylabel('Event');  

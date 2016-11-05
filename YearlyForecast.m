@@ -11,6 +11,7 @@ function YearlyForecast()
     
     nof = size(X,1);                 # number of features
     M = size(X,2);                   # number of training examples
+    m = 365;
     K = size(Y,1);                   # number of classification outputs
     
     # Choose initial Theta for Layer 1 and Layer 2 of Nueral Network
@@ -18,12 +19,7 @@ function YearlyForecast()
 	  iTheta2 = 2*IEPSILON*rand( nof - 1, nof ) - IEPSILON*ones(nof-1, nof);
   
     # Training Nueral Network to make Predictions for 20 years
-    [OT1,OT2,FP] = Predictor(X(:,[1:365]),X(:,366),iTheta1,iTheta2,lambda);          #Initialization of neural network by 1st year data
-    FP = FP';
-    for i = 367:M
-        [OT1,OT2,fp] = Predictor(X(:,[i-365:i-1]),X(:,i),OT1,OT2,lambda);
-        FP = [FP;fp'];
-    endfor
+    [OT1,OT2,FP] = Predictor(X,iTheta1,iTheta2,lambda);
     
     alpha = 0.75;                    # learning rate
     
@@ -34,10 +30,10 @@ function YearlyForecast()
     saveNN(OT1,OT2,OTC1,OTC2,OTC3);
     
     # Save all data into text files
-    FP = [(X(:,[1:365]))';FP]';
+    FP = [(X(:,[1:m]))';FP']';
     FP = [FP;FC']';
     saveYearlyPrediction(FP);
     
     #Plot all curves for 20 years
-    plotCurves(FP,(X(:,[1:M]))',Y);
+    plotCurves(FP,X',Y);
 endfunction
