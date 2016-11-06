@@ -40,6 +40,9 @@ function plotCurves(Prediction, Actual, Y)
         ylabel(label);
         filename = sprintf(strcat(label,'.png'));
         saveas(gcf, filename, 'png');
+        for k = 1:100
+            ;
+        endfor
     endfor
     
     Y3 = 0;

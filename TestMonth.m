@@ -43,10 +43,13 @@ function TestMonth ( OTP1, OTP2, OTC1, OTC2, OTC3 )
         ylabel(label);
         filename = sprintf(strcat('January2016Predictions',label,'.png'));
         saveas(gcf, filename, 'png');
+        for k = 1:100
+            ;        
+        endfor
     endfor
  
  [A2,A3,Y] = forwardPropClassifier(FP,OTC1,OTC2,OTC3);
-  
+  Y = (Y > 0.5);
   Y3 = 0;
   for i = 1:m
       if Y(:,i) == [1;0;0;0]                                    # Actually ThunderStorm
@@ -66,7 +69,6 @@ function TestMonth ( OTP1, OTP2, OTC1, OTC2, OTC3 )
   ylabel('Event');  
   filename = sprintf(strcat("January2016Events",'.png'));
   saveas(gcf, filename, 'png');  
-  
   FP = [FP;Y]';
   save("-ascii",'January2016.txt',"FP");
 endfunction

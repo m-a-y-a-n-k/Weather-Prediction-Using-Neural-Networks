@@ -27,8 +27,7 @@ function YearlyForecast()
     [OTC1,OTC2,OTC3,FC] = Classifier(X,Y,alpha,IEPSILON);
     
     # Testing results obtained from 20 years to predict future weather features for January 2016
-    saveNN(OT1,OT2,OTC1,OTC2,OTC3);
-    TestMonth ( OTP1, OTP2, OTC1, OTC2, OTC3 );
+    TestMonth ( OT1, OT2, OTC1, OTC2, OTC3 );
     
     # Save all data into text files
     FP = [(X(:,[1:m]))';FP']';
