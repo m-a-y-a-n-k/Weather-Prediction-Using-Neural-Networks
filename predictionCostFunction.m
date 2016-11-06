@@ -12,7 +12,7 @@ function [jVal,gradientVec] = predictionCostFunction (thetaVec,nof,x,y,e,lambda)
 # Computing Error and Cost Function
   sqrError = sum(sum((a3 - y).^2));
   jVal = (1/(2*e) )*( sqrError + lambda*sum(thetaVec.^2) );                   # Cost Function J to minimize
-
+  
 # Applying backpropagation 
   [gradientVec] = backPropPredictor(a1,a2,a3,theta1,theta2,y,e,lambda);       # Gradient Vector to make Optimum for minimization
 endfunction
